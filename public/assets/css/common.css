@@ -1,0 +1,43 @@
+header.fixed-navbar{padding-top:5rem}
+#header-search{width:10rem;cursor:pointer}
+#search-modal-close{font-size:2rem;position:absolute;left:auto;right:2rem;top:20%;border-style:solid;border-width:2px}
+    @media screen and (min-width:576px){
+        #search-modal-close{top:25%}
+    }
+#search-modal-info-close{color:#ffffff;font-style:italic;margin-bottom:.25rem}
+#search-modal-content{min-height:calc(60% - var(--bs-modal-margin) * 2)}
+#q:placeholder-shown{font-style:italic}
+#search-modal-advanced-info{color:#ffffff;margin-top:1rem}
+/*
+ * https://cssgradient.io/
+*/
+#search-modal .modal-content.bg-color-1{
+    background: rgb(189,195,34);
+    background: linear-gradient(0deg, rgba(189,195,34,0.8) 0%, rgba(193,187,35,0.95) 16%, rgba(247,69,44,1) 70%, rgba(252, 148, 142, 0.83) 100%); 
+}
+#search-modal .modal-content.bg-color-2{
+    background: rgb(49,77,58);
+    background: linear-gradient(0deg, rgba(49,77,58,0.8407563709077381) 0%, rgba(124,186,122,1) 25%, rgba(114,212,110,1) 50%, rgba(114,212,110,1) 75%, rgba(183,247,133,0.829551889115021) 100%); 
+}
+#search-modal .modal-content.bg-color-3{
+    background: rgb(101,184,250);
+    background: linear-gradient(0deg, rgba(101,184,250,0.8183474073223039) 0%, rgba(61,146,218,1) 25%, rgba(61,146,218,1) 50%, rgba(67,209,246,1) 75%, rgba(101,184,250,1) 100%); 
+}
+#search-modal .modal-content.bg-color-4{
+    background: rgb(11,11,11);
+    background: linear-gradient(0deg, rgba(11,11,11,0.8407563709077381) 0%, rgba(6,6,6,1) 25%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 75%, rgba(51,51,51,0.829551889115021) 100%); 
+}
+#search-modal .modal-content.bg-color-5{
+    background: rgb(77,69,103);
+    background: linear-gradient(0deg, rgba(77,69,103,0.8407563709077381) 0%, rgba(138,74,181,1) 25%, rgba(159,6,218,1) 50%, rgba(168,7,212,1) 75%, rgba(188,175,217,0.829551889115021) 100%); 
+}
+
+.goback{float:right}
+
+.song-title{font-size:2rem}
+.song-artist{font-size:1.6rem}
+.song-album{font-size:1.4rem}
+.song-views{font-family:'Courier New', Courier, monospace}
+.song-lyrics-title{font-size:1.8rem;text-align:center}
+.song-lyrics{text-align:center}
+
