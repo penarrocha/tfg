@@ -22,3 +22,4 @@ yarn-error.log
 /0_backups
 /app/Models/AlbumCopy.php
 /app/Http/Controllers/AlbumControllercopy.php
+tfg-apache-error.log
