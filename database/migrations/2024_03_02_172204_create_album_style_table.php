@@ -13,7 +13,7 @@ return new class extends Migration {
             $table->mediumIncrements('id');
             $table->mediumInteger('album_id', 8)->nullable(false)->unsigned();
             $table->foreign('album_id')->references('id')->on('albums')->restrictOnDelete()->cascadeOnUpdate();
-            $table->mediumInteger('style_id', 8)->nullable(false)->unsigned();
+            $table->smallInteger('style_id', 8)->nullable(false)->unsigned();
             $table->foreign('style_id')->references('id')->on('styles')->restrictOnDelete()->cascadeOnUpdate();
             $table->unique(['album_id', 'style_id']);
         });

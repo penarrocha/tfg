@@ -12,17 +12,17 @@
     <li class="breadcrumb-item active" aria-current="page">{{ $artist->artist }}</li>
   </ol>
 </nav>
-<h1>{{ $artist->artist }}</h1>
+<p class="h1">{{ $artist->artist }}</p>
 <div class="row">
   <div class="col-12{{ $artist->images->count() > 0 ? ' col-sm-6 col-md-5 col-lg-4' : ''}}">
-    <p>Tenemos {{ $albums->count() }} álbumes de <code>{{ $artist->artist }}</code></p>
-    <ul>
+    <p>Tenemos {{ $albums->count() }} álbum{{ $albums->count() > 1 ? 'es' : '' }} de <code>{{ $artist->artist }}</code></p>
+    <ul class="artist-albums">
         @foreach ($albums as $album)
         <li>{!! $album->authorLinkable() !!} - {!! $album->albumLinkable() !!} ({{ $album->released_year }})</li>
         @endforeach
     </ul>
   </div>
-  @if ($artist->images->count() > 0)
+  @if ($artist->images->count() > 0 || $artist->description !== null)
   <div class="col-12 col-sm-6 col-md-7 col-lg-8">
     <div id="artistCarousel" class="carousel slide carousel-fade mb-5">
       <div class="carousel-indicators">
@@ -46,6 +46,11 @@
         <span class="visually-hidden">Siguiente</span>
       </button>
     </div>
+    @if ($artist->description != null)
+    <div class="artist-description">
+      {!! $artist->description !!}
+    </div>
+    @endif 
   </div>
   @endif
 </div>

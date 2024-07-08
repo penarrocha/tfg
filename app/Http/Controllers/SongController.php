@@ -26,8 +26,11 @@ class SongController extends Controller {
         $song = Song::with(['album'])->findOrFail($id);
         //$song = Song::findOrFail($id);
         $album = Album::with(['songs', 'relationships', 'artists', 'videos'])->findOrFail($song->album->id);
+        /*
         ++$song->views;
         $song->save();
+        */
+        $song->increment('views');
         return view('song', ['song' => $song, 'id' => $id, 'album' => $album, 'authorString' => $album->authorToString()]);
     }
 }

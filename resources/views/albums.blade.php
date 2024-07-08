@@ -7,15 +7,14 @@
       <li class="breadcrumb-item active" aria-current="page">Álbumes</li>
     </ol>
 </nav>
-<h1>Álbumes</h1>
+<h1 class="mb-3">Álbumes</h1>
 @if ($albums->count() > 0)
-    <ul>
+    <ul class="albumes" id="albumes">
     @foreach($albums as $album)
-        <li>{!! $album->authorLinkable() !!} - 
-            {!! $album->albumLinkable() !!} 
+        <li>{!! $album->authorLinkable() !!} - {!! $album->albumLinkable() !!} 
             ({{ $album->released_year }}, 
-            {!! $album->stylesLinkable() !!}, 
-            {{ $album->label->label }})</li>
+            {!! $album->stylesLinkable() !!}{{--, 
+            {{ $album->label->label }}--}})</li>
     @endforeach
     </ul>
 @else

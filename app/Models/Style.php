@@ -12,12 +12,16 @@ class Style extends Model {
     protected int $numberOfSongs = -1;
     protected ?\Illuminate\Support\Collection $songs = null;
 
+    protected $fillable = ['style', 'alias', 'description'];
+
+/*
     function __construct() {
         $this->table = 'styles';
-        $this->guard = [];
+        //$this->guarded = [];
+        $this->fillable = ['style', 'alias', 'description'];
+        //$this->fillable = [];
         
-        parent::__construct();
-    }
+    }*/
 
     public function albums() : BelongsToMany {
         //return $this->belongsToMany(Album::class)->withPivot('id')->using(AlbumStyle::class);
@@ -26,6 +30,10 @@ class Style extends Model {
 
     public function link() : string {
         return sprintf('<a href="%s" class="link style">%s</a>', route('style', ['alias' => $this->alias]), $this->style);
+    }
+
+    public function getLink() : string {
+        return route('style', ['alias' => $this->alias]);
     }
     
     public function getNumberOfSongs() : int {

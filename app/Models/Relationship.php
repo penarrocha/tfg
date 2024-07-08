@@ -10,7 +10,7 @@ class Relationship extends Model {
 
     function __construct() {
         $this->table = 'relationships';
-        $this->guard = [];
+        $this->guarded = [];
         parent::__construct();
     }
     

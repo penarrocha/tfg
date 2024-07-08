@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Query\JoinClause;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class Artist extends Pivot {
@@ -20,7 +21,7 @@ class Artist extends Pivot {
     
     function __construct() {
         $this->table = 'artists';
-        $this->guard = [];
+        $this->guarded = [];
         parent::__construct();
     }
 
@@ -44,20 +45,34 @@ class Artist extends Pivot {
         return sprintf('<a href="%s" class="link artist">%s</a>', route('artist', ['alias' => $this->alias]), $this->artist);
     }
 
+    /**
+     * Return the albums of an artist, ordered by date released (asc) and album name (asc)
+     */
+    public function albumes() : Collection {
+        $albums = Album::with(['styles', 'artists', 'label', 'relationships'])
+                ->select(['albums.*', 'a.artist'])
+                ->join('album_artist AS aa', function(JoinClause $join){
+                    $join->on('albums.id', '=', 'aa.album_id')
+                        ->where('aa.artist_id', '=', $this->id);
+                })
+                ->join('artists AS a', function(JoinClause $join) {
+                    $join->on('aa.artist_id', '=', 'a.id');
+                        //->where('aa.ordering', '=', 0);
+                })
+                ->groupBy('aa.album_id')
+                ->orderBy('a.artist', 'asc')
+                ->orderBy('albums.released_year', 'asc')
+                ->get();
+        return $albums;
+    }
+
     public function songs() : \Illuminate\Support\Collection {
-        $songs = Artist::join('album_artist AS aa', function(JoinClause $join){
+        return Artist::join('album_artist AS aa', function(JoinClause $join){
                                 $join->on('artists.id', '=', 'aa.artist_id')
                                     ->whereRaw('artists.alias=:alias', ['alias' => $this->alias]);
                         })
                         ->with('albums')
                         ->get();
-
-                    $songs2 = Artist::with([
-                    'albums' => function($query){
-                    }
-                    ])->whereRaw('alias=:alias', ['alias' => $this->alias])
-                    ->get();
-        return $songs;
     }
 
     public function getNumberOfSongs() : int {

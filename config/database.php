@@ -42,7 +42,6 @@ return [
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
-
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
@@ -63,6 +62,8 @@ return [
                 'NO_ZERO_DATE',
                 'NO_ZERO_IN_DATE',
                 #'NO_AUTO_CREATE_USER',
+                'NO_ENGINE_SUBSTITUTION', 
+                'TRADITIONAL'
             ],
             'engine' => 'InnoDB ROW_FORMAT=DYNAMIC',
             'options' => extension_loaded('pdo_mysql') ? array_filter([

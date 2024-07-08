@@ -9,7 +9,7 @@ class Comment extends Model {
 
     function __construct() {
         $this->table = 'comments';
-        $this->guard = [];
+        $this->guarded = [];
         parent::__construct();
     }
 

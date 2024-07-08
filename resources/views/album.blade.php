@@ -1,4 +1,4 @@
-@section('title', $album->album . ' (' . $album->released_year . ') - ' . $album->authorToString())
+@section('title', $album->authorToString() . ' - ' . $album->album . ' (' . $album->released_year . ')')
 @section('preloadFiles')
 <link rel="preload" as="style" src="{{ asset('assets/css/album.css') }}" />
 <link rel="preload" as="script" src="{{ asset('assets/js/album.js') }}" />
@@ -16,14 +16,14 @@
 <h1 class="album-title">{!! $album->authorLinkable() !!} - {{ $album->album }}</h1>
 <div class="row">
   <div class="col-12 col-md-6 col-lg-5">
-    <p><i class="fa-regular fa-calendar"></i> Fecha de lanzamiento: {{ $album->date() }}</p>
-    <p><i class="fa-solid fa-record-vinyl"></i> Discográfica: {{ $album->label->label }}</p>
-    <p><i class="fa-solid fa-music"></i> Estilo: {!! $album->stylesLinkable() !!}</p>
-    <h2 class="tracklist"><i class="fa-solid fa-list-ol"></i> Tracklist / Lista de canciones <i class="fa-regular fa-clock d-block float-end align-text-bottom fs-3 mt-2" title="Duración"></i></h2>
+    <p><span class="fa-regular fa-calendar" aria-hidden="true"></span> Fecha de lanzamiento: {{ $album->date() }}</p>
+    <p><span class="fa-solid fa-record-vinyl" aria-hidden="true"></span> Discográfica: {{ $album->label->label }}</p>
+    <p><span class="fa-solid fa-music" aria-hidden="true"></span> Estilo: {!! $album->stylesLinkable() !!}</p>
+    <h2 class="tracklist"><span class="fa-solid fa-list-ol" aria-hidden="true"></span> Tracklist / Lista de canciones <span class="fa-regular fa-clock d-block float-end align-text-bottom fs-3 mt-2" title="Duración" aria-hidden="true"></span></h2>
     {{--  </code> tiene {{ $songs->count() }} canciones:</p> --}}
-    <ul class="album-tracklist" id="album-{{ $album->id }}">
+    <ul class="album-tracklist" id="album-tracklist">
       @foreach ($songs as $song)
-      <li><span class="track-ordering">{{ $song->pivot->ordering_text ?? $loop->iteration }}</span>{{--
+      <li data-url="{!! $song->link($album->authorToString()) !!}"><span class="track-ordering">{{ $song->pivot->ordering_text ?? $loop->iteration }}</span>{{--
         @if ($song->pivot->ordering_text !== null)
         <span class="track-ordering">{{ $song->pivot->ordering_text }}</span>
         @endif 
@@ -45,14 +45,19 @@
         @foreach ($album->images as $image)
         <div class="carousel-item{{ $loop->first ? ' active' : '' }}">
           <img src="{{ asset($image->src) }}" class="d-block w-100" alt="{{ $image->description ?? sprintf('Imagen #%d del álbum %s - %s', $loop->iteration, $album->authorToString(), $album->album) }}" />
+          @if ($image->description !== null)
+          <div class="carousel-caption album-caption d-none d-md-block">
+            <p>{{ $image->description }}</p>
+          </div>
+          @endif
         </div>
       @endforeach
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#albumCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <button class="carousel-control-prev album-carousel-control" type="button" data-bs-target="#albumCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon album-carousel-control-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Anterior</span>
       </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#albumCarousel" data-bs-slide="next">
+      <button class="carousel-control-next album-carousel-control" type="button" data-bs-target="#albumCarousel" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Siguiente</span>
       </button>
@@ -60,6 +65,13 @@
     @endif
   </div>
 </div>
+@if ($album->description !== null)
+<div class="album-description">
+  <h3 class="album-description-heading">Descripción del álbum {{ $album->album }}: {{ $album->album }}</h3>
+  {!! $album->description !!}
+</div>
+@endif
+<p class="album-views views-number">Número de visualizaciones del álbum: {{ $album->views }}</p>
 @endsection
 @section('afterJsFiles')
 <script src="{{ asset('assets/js/album.js') }}"></script>

@@ -1,0 +1,6 @@
+.artist-albums{margin-left:0;padding-left:0;list-style:none}
+.artist-albums li{margin-bottom:0.75rem}
+.artist-description{margin-bottom:3rem}
+.artist-description .song-title{font-size:1rem;font-style:italic}
+.artist-description .artist-name{font-weight:bold}
+.artist-description .album-name{}

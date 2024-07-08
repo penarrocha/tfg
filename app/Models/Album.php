@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Support\Str;
@@ -12,18 +13,22 @@ use Illuminate\Support\Carbon;
 
 class Album extends Pivot {
 
-    protected array $authors;
+    protected array $authors;/* = [];
+    protected $table = 'albums';
+    protected $guarded = ['*'];
+    protected $fillable = ['*'];*/
 
     function __construct() {
         $this->table = 'albums';
-        $this->guard = [];
+        $this->guarded = [];
+        $this->fillable = [];
         $this->authors = [];
         
         parent::__construct();
     }
 
     public function label() : BelongsTo {
-        return $this->belongsTo(Label::class);
+        return $this->belongsTo(Label::class, 'label_id');
     }
 
     public function artists() : BelongsToMany {
@@ -147,6 +152,10 @@ class Album extends Pivot {
             $styles[] = $s->link();
         }
         return implode($glue, $styles);
+    }
+
+    public function stylesNotLinkable(string $glue = ' | ') : string {
+        return implode($glue, $this->stylesArray());
     }
 
     public function stylesArray() : array {

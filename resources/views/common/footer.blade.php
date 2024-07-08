@@ -1,10 +1,12 @@
 
     <footer id="footer" class="footer mt-auto py-5 bg-dark text-white">
       <div class="container">
-        <p class="float-end mb-1">
-          <a href="#" id="backToTop">Back to top</a>
-        </p>
-        <p class="mb-1">EuroDanceLyrics &copy; {{ date('Y') }}</p>
+        <ul class="footer-info">
+          <li class="d-none d-sm-inline-block"><span class="fa-solid fa-record-vinyl" aria-hidden="true"></span> {{ env('APP_NAME') }} &copy; {{ date('Y') }}</li>
+          <li><a class="link-warning{{ Route::currentRouteName() === 'legal' ? ' active' : ''}}" href="{{ route('legal') }}">Aviso legal</a></li>
+          <li><a class="link-warning{{ Route::currentRouteName() === 'contact' ? ' active' : ''}}" href="{{ route('contact') }}">Contacto</a></li>
+          <li><a class="link-warning{{ Route::currentRouteName() === 'cookies' ? ' active' : ''}}" href="{{ route('cookies') }}">Política de cookies</a></li>
+        </ul>
       </div>
     </footer>
     <div id="search-modal" class="modal" tabindex="-1">
@@ -14,16 +16,22 @@
           <div class="justify-content-center modal-dialog-centered flex-column" id="search-modal-content">
             <div class="col-10 col-md-7 col-lg-5 col-xl-4">
               <div id="search-modal-info-close">Pulsa la tecla <code>Esc</code> o sobre la X para cerrar</div>
-              <form class="" id="search-form" role="search">
+              <form class="" id="search-form" role="search" action="{{ route('search') }}" method="GET">
                 <div class="input-group">
-                  <input class="form-control form-control-lg me" type="search" name="q" id="q" placeholder="Grupo, álbum, título o parte de la letra de la canción" aria-label="Search">
-                  <button class="btn btn-lg btn-primary" type="submit"><i class="fa-solid fa-search"></i></button>
+                  <label for="q" class="visually-hidden" aria-hidden="true">Buscar</label>
+                  <input class="form-control form-control-lg me" type="search" name="q" id="q" placeholder="Grupo, álbum, título o parte de la letra de la canción" aria-label="Buscar">
+                  <button class="btn btn-lg btn-primary" type="submit"><span class="fa-solid fa-search" aria-hidden="true"></span></button>
                 </div>
               </form>
-              <div id="search-modal-advanced-info">... o prueba nuestro buscador avanzado</div>
+              {{--<div id="search-modal-advanced-info">... o prueba nuestro buscador avanzado</div>--}}
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div id="refresh-modal" class="modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+          <span class="fa-solid fa-spinner fa-spin-pulse fa-5x"></span>
       </div>
     </div>
     

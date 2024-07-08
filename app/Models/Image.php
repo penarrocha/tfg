@@ -9,7 +9,7 @@ class Image extends Model {
 
     function __construct() {
         $this->table = 'images';
-        $this->guard = [];
+        $this->guarded = [];
         parent::__construct();
     }
 

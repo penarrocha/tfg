@@ -68,7 +68,6 @@ class AlbumResource extends Resource
                         return $record->authorToString();
                     })
                     //->getStateUsing(fn ($record) => $record->authorToString())
-                    //->getStateUsing(fn ($record) => $record->relationship_id)
                     //->modifyQueryUsing(fn (Builder $query) => $query->with(['styles', 'artists', 'label', 'relationships']))
                     */
                     ->sortable()

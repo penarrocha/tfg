@@ -8,6 +8,18 @@ use Illuminate\Http\Request;
 class IndexController extends Controller {
     
     public function index() : View {
-        return view('welcome');
+        return view('home');
+    }
+
+    public function contacto() : View {
+        return view('contact');
+    }
+
+    public function legal() : View {
+        return view('legal');
+    }
+
+    public function cookies() : View {
+        return view('cookies');
     }
 }

@@ -12,10 +12,11 @@ return new class extends Migration {
      */
     public function up() : void {
         Schema::create('styles', function (Blueprint $table) {
-            $table->mediumIncrements('id');
+            $table->smallIncrements('id');
             $table->string('style', 32)->unique()->nullable(false);
             $table->string('alias', 32)->unique()->nullable(false);
             $table->text('description');
+            $table->string('src', 32);
             $table->timestamps();
         });
     }

@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->string('song_clean', 64)->nullable(false);
             $table->char('duration', 7);
             $table->text('lyrics');
+            $table->text('description');
             $table->mediumInteger('views', 8)->nullable(false)->unsigned()->default(0);
             $table->unique(['album_id', 'song']);
             $table->timestamps();

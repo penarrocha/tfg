@@ -8,7 +8,7 @@ class Label extends Model {
 
     function __construct() {
         $this->table = 'labels';
-        $this->guard = [];
+        $this->guarded = [];
         parent::__construct();
     }
 

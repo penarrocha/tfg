@@ -5,10 +5,8 @@ h2.tracklist{margin-top:2rem}
     padding-left:0
 }
 .album-tracklist li::after, .album-tracklist li::before{content: " ";clear:both}
-.album-tracklist li{
-    border-bottom:1px solid #dedede;
-    padding:1rem 0.5rem
-}
+.album-tracklist li{border-bottom:1px solid #dedede;padding:1rem 0.5rem;font-size:1.2rem}
+.album-tracklist li:hover{background:#e7e7e7;cursor:pointer}
 
 .track-ordering{
     float:left;
@@ -23,11 +21,20 @@ h2.tracklist{margin-top:2rem}
     width:10%;
     float:right;
     display:block;
+    text-align:right
 }
 .track-duration::after{content:" ";clear:both;display:block}
-
+.album-caption{background:#1e1e1e;opacity:0.8;left:0;right:0;bottom:0}
+#albumCarousel .carousel-indicators{padding-bottom:0;margin-bottom:0.5rem}
+/*
+#albumCarousel{padding-bottom:10rem;}
+*/
 @media screen and (min-width:992px){
-    .track-ordering{width:5%}
-    .track-name{width:90%}
-    .track-duration{width:5%}
+    .track-ordering{width:10%}
+    .track-name{width:80%}
+    .track-duration{width:10%}
 }
+
+
+.album-description{margin-top:3rem;font-size:1.2rem}
+.album-description-heading{margin-bottom:1rem}

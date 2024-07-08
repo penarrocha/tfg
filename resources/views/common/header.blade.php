@@ -6,6 +6,10 @@
     <meta name="description" content="@yield('description')">
     <meta name="author" content="Iván Peñarrocha">
     <title>@yield('title')</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/favicon/vinyl-32x32.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/images/favicon/vinyl-180x180.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicon/vinyl-16x16.png') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon/vinyl-32x32.ico') }}">
     <link rel="preload" as="style" src="{{ asset('assets/bootstrap-5.3.3-dist/css/bootstrap.min.css') }}" />
     <link rel="preload" as="style" src="{{ asset('assets/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js') }}" />
     <link rel="preload" as="style" src="{{ asset('assets/fontawesome-6.5.2/css/fontawesome.min.css') }}" />
@@ -14,35 +18,35 @@
     <link rel="preload" as="style" src="{{ asset('assets/fontawesome-6.5.2/css/solid.min.css') }}" />
     <link rel="preload" as="style" src="{{ asset('assets/css/common.css') }}" />
     <link rel="preload" as="script" src={{ asset('assets/js/common.js') }} />
+    <meta name="robots" content="noindex,nofollow" />
     @yield('preloadFiles')
     @yield('beforeBodyJsFiles')
     @yield('beforeBodyInlineJs')
   </head>
-  {{-- <body class="@yield('bodyClass', 'edl') d-flex flex-column vh-100" id="@yield('bodyId', 'body')">--}}
   <body class="@yield('bodyClass', 'edl') d-flex h-100 flex-column" id="@yield('bodyId', 'body')">
   <header class="fixed-navbar">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <div class="container-fluid">
-        <span class="navbar-brand">{{ Config::get('app.name') }}</span>
+      <div class="container{{-- -fluid --}}">
+        <span class="navbar-brand"><span class="fa-solid fa-record-vinyl" aria-hidden="true"></span> {{ Config::get('app.name') }}</span>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenuCollapse" aria-controls="navbarMenuCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarMenuCollapse">
           <ul class="navbar-nav mb-2 mb-md-0 d-flex me-auto">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#" title="Inicio"><i class="fa-solid fa-home"></i></a>
+              <a class="nav-link{{ Route::currentRouteName() === 'home' ? ' active' : ''}}" aria-current="page" href="{{ route('home') }}" title="Inicio"><span class="fa-solid fa-home" aria-hidden="true"></span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('albums') }}">Álbumes</a>
+              <a class="nav-link{{ Route::currentRouteName() === 'albums' || Route::currentRouteName() === 'album' ? ' active' : ''}}" href="{{ route('albums') }}">Álbumes</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('artists') }}" >Artistas / Grupos</a>
+              <a class="nav-link{{ Route::currentRouteName() === 'artists' || Route::currentRouteName() === 'artist' ? ' active' : ''}}" href="{{ route('artists') }}">Artistas / Bandas</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('styles') }}" >Estilos</a>
+              <a class="nav-link{{ Route::currentRouteName() === 'styles' ? ' active' : ''}}" href="{{ route('styles') }}">Estilos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('downloads') }}" >Descargas</a>
+              <a class="nav-link{{ Route::currentRouteName() === 'downloads' ? ' active' : ''}}" href="{{ route('downloads') }}">Descargas</a>
             </li>
           </ul>
           {{--
@@ -71,11 +75,17 @@
               <button class="btn btn-primary" type="submit"><i class="fa-solid fa-search"></i></button>
             </div>
           </form>
-          --}}
+          --}}{{--
+          <form class="d-flex" role="search">
+            <div class="input-group">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+            </div>
+          </form>--}}
           <div class="d-flex" id="header-search">
             <div class="input-group">
                 <span class="form-control">Buscar ...</span>
-                <button class="btn btn-primary"><i class="fa fa-search"></i></button>
+                <button class="btn btn-primary"><span class="fa fa-search" aria-hidden="true"></span></button>
             </div>
           </div>
           {{--

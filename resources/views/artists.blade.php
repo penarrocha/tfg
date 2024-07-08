@@ -13,8 +13,8 @@
       <li class="breadcrumb-item active" aria-current="page">Artistas</li>
     </ol>
 </nav>
-<h1>Bandas / Artistas</h1>
-<ul>
+<h1>Artistas / Bandas / Grupos musicales</h1>
+<ul class="artists-list">
     @foreach ($artists as $artist)
     <li>{!! $artist->link() !!}</li>
     @endforeach

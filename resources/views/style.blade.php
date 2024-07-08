@@ -10,9 +10,9 @@
 </nav>
 <h1>{{ $style->style }}</h1>
 <p>Tenemos {{ $albums->count() }} álbums -con un total de {{ $songsNumber }} canciones- del estilo {{ $style->style }}</p>
-<ul>
+<ul class="estilos" id="estilos">
     @foreach($albums as $album)
-        <li>{!! $album->authorLinkable() !!} - {!! $album->albumLinkable() !!} ({{ $album->released_year }}) [{!! $album->stylesLinkable() !!}]</li>
+        <li>{!! $album->authorLinkable() !!} - {!! $album->albumLinkable() !!} ({{ $album->released_year }}, {!! $album->stylesLinkable() !!})</li>
     @endforeach
 </ul>
 @endsection

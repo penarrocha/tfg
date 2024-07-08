@@ -11,7 +11,7 @@ class Video extends Model {
 
     function __construct() {
         $this->table = 'videos';
-        $this->guard = [];
+        $this->guarded = [];
         parent::__construct();
     }
 

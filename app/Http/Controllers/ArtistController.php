@@ -16,7 +16,8 @@ class ArtistController extends Controller {
 
     public function artist(string $alias): View {
         $artist = Artist::with(['albums', 'albums.relationships', 'albums.artists', 'images'])
-                        ->where('alias', $alias)->firstOrFail();
+                        ->where('artists.alias', $alias)
+                        ->firstOrFail();
         /*
         $artist = Artist::with(['albums', 'albums.relationships', 'albums.artists', 'images'])
                         ->join('artists AS a', 'a.alias', '=', $alias)
@@ -48,10 +49,13 @@ class ArtistController extends Controller {
                 ->orderBy('albums.released_at', 'asc')
                 ->get();
         */
+        $artist->increment('views');
+        
+        
         return view('artist', [
             'artist' => $artist, 
-            'albums' => $artist->albums
-            //'albums' => $albums
+            'albumes' => $artist->albums, 
+            'albums' => $artist->albumes()
         ]);
     }
     

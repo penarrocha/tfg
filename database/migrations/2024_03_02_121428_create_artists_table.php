@@ -12,9 +12,10 @@ return new class extends Migration {
         Schema::create('artists', function (Blueprint $table) {
             $table->mediumIncrements('id');
             $table->string('artist', 64)->unique()->nullable(false);
-            $table->string('artist_clean', 64)->unique()->nullable(false);
+            $table->string('artist_clean', 64)->nullable(false);
             $table->string('alias', 64)->unique()->nullable(false);
             $table->string('url', 255);
+            $table->mediumInteger('views', 8)->nullable(false)->unsigned()->default(0);
             $table->text('description');
             $table->timestamps();
         });

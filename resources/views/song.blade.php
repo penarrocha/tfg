@@ -1,13 +1,18 @@
-@section('title', $song->song . ' - ' . $album->authorToString())
+@section('title', $album->authorToString() . ' - ' . $song->song . ' lyrics')
 @section('preloadFiles')
 <link rel="preload" as="style" src="{{ asset('assets/css/song.css') }}" />
 <link rel="preload" as="script" src="{{ asset('assets/js/song.js') }}" />
+{{--<link rel="preload" as="script" src="https://genius.codes" />--}}
 @endsection
 @section('afterCssFiles')
 <link rel="stylesheet" href="{{ asset('assets/css/song.css') }}" />
 @endsection
+{{-- 
 @section('afterJsFiles')
+<script src="https://genius.codes"></script>
 @endsection
+--}}
+
 @extends('common.body')
 @section('content')
 
@@ -22,12 +27,10 @@
     </ol>
 </nav>
 
-<h1 class="song-title">{{ $song->song }}</h1>
-<h2 class="song-artist">Artist: {!!  $album->authorLinkable() !!}</h2>
-<h3 class="song-album">Álbum: {!! $album->albumLinkable() !!} ({{ $album->released_year }})</h3>
-<p class="song-views mb-5">Nº visitas: {{ $song->views }}</p>
+<p class="h1 song-title">{!!  $album->authorLinkable() !!} - {{ $song->song }}</p>
+<p class="h2 song-album mt-3">Álbum: {!! $album->albumLinkable() !!} ({{ $album->released_year }})</p>
 @if ($song->videos->count())
-    <div class="row">
+    <div class="row mt-5">
         <div class="col-12 col-md-6 col-lg-8">
             <div id="videoContainer">
                 @if ($song->videos->count() > 1)
@@ -53,16 +56,15 @@
         <div class="col-12 col-md-6 col-lg-4">
 @endif
 @if ($song->lyrics)
-<h4 class="song-lyrics-title">Letra de {{ $song->song }}</h4>
+<p class="h3 song-lyrics-title">Letra de {{ $song->song }}</p>
 <div class="song-lyrics {{ $song->videos->count() ? 'with-video' : '' }}" id="song-{{ $song->id }}">
     {!! nl2br($song->lyrics) !!}
 </div>
 @else
-<h4 class="song-lyrics-title">Letra de {{ $song->song }}</h4>
+<p class="h3 song-lyrics-title">Letra de {{ $song->song }}</p>
 <div class="song-no-lyrics" id="song-{{ $song->id }}">
-    <p>Según nuestros registros, la canción {{ $song->song }} es instrumental, por lo que no tiene letra.</p>
-    <p>Si crees que se trata de un error y/o puedes proporcionarnos la letra de esta canción, por favor, emplea el 
-        formulario de contacto para hacérnosla llegar.</p>
+    <p>No tenemos la letra de la canción <code class="song-title">{{ $song->song }}</code>.</p>
+    <p>Si no es instrumental y puedes proporcionarnos su letra, por favor, emplea el formulario de contacto para hacérnosla llegar.</p>
 </div>
 @endif 
 @if ($song->videos->count())
@@ -86,4 +88,8 @@
     </ul>
 </div>
 @endif
+<p class="song-views views-number">Número de visualizaciones de esta canción: {{ $song->views }}</p>
+{{-- 
+    <div id='rg_embed_link_1394' class='rg_embed_link' data-song-id='1394'>Read <a href='https://genius.com/Pink-floyd-shine-on-you-crazy-diamond-pts-1-5-lyrics'>“Shine On You Crazy Diamond, Pts. 1-5” by Pink Floyd</a> on Genius</div> <script crossorigin src='//genius.com/songs/1394/embed.js'></script>
+--}}
 @endsection
