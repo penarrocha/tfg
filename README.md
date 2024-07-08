@@ -1,4 +1,4 @@
-<p align="center"><a href="https://tfg.penarrocha.es" target="_blank"><img src="https://penarrocha.es/media/tfg/tfg-home.jpg" width="400" alt="Ir al website de demok"></a></p>
+<p align="center"><a href="https://tfg.penarrocha.es" target="_blank"><img src="https://penarrocha.es/media/tfg/tfg-home.jpg" alt="Ir al website de demok"></a></p>
 
 ## Sobre el TFG
 
@@ -27,4 +27,4 @@ Gestionar desde el backend la información disponible, definida en los Casos de 
 ## ¿Cómo está desarrollada la aplicación?
 La aplicación está construida con Laravel 11 y testada en PHP 8.3.8. Emplea una base de datos MySQL, incluida en el archivo *tfg_20240708.sql*.
 
-<p align="center"><img src="https://penarrocha.es/media/tfg/tfg-album.jpg" width="600" alt="Información sobre un álbum" /></p>
+<p align="center"><img src="https://penarrocha.es/media/tfg/tfg-album.jpg" alt="Información sobre un álbum" /></p>
