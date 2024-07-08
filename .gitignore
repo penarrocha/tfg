@@ -23,3 +23,4 @@ yarn-error.log
 /app/Models/AlbumCopy.php
 /app/Http/Controllers/AlbumControllercopy.php
 tfg-apache-error.log
+laravel-apache-error.log
