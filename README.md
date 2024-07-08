@@ -13,7 +13,7 @@ El acceso a la demo del proyecto está protegida con **HTTP Basic Authentication
 
 ## ¿Qué permite hacer este desarrollo?
 
-Mostrar información sobre discografías y letras de canciones, haciendo especial hincapié en la posibilidad de que un álbum puede pertenecer a una cantidad indefinida de bandas y/o autores, almacenando toda la información disponible en una base de datos relacional.
+Mostrar información sobre discografías y letras de canciones, **haciendo especial hincapié en la posibilidad de que un álbum puede pertenecer a una cantidad indefinida de bandas y/o autores**, almacenando toda la información disponible en una base de datos relacional.
 
 <p align="center"><img src="https://penarrocha.es/media/tfg/tfg-album-2.jpg" alt="Información sobre un álbum con múltiples autores" /></p>
 
